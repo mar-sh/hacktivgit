@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const githubOauth = async(req, res, next) => {
+const githubOauth = (req, res, next) => {
   const { code } = req.body;
   const url = `https://github.com/login/oauth/access_token`
   const queries = `?code=${code}&client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
