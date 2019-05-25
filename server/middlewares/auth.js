@@ -6,25 +6,26 @@ const userAuthentication = (req, res, next) => {
     try{
       const decode = verifyAccessToken(req.headers.authorization, process.env.JWT_SECRET);
       
-      return User.findOne({ _id: decode.id })
-        .then((user) => {
-          if(user) {
-            req.authenticated = {
-              id: user._id,
-              userId: user.github_id,
-              github_login: user.github_login,
-              github_token: user.github_token,
-            };
+      return User
+        .findOne({ _id: decode.id })
+          .then((user) => {
+            if(user) {
+              req.authenticated = {
+                id: user._id,
+                userId: user.github_id,
+                github_login: user.github_login,
+                github_token: user.github_token,
+              };
 
-            return next();
-          } else {
-            throw new Error('user not found')
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          res.status(500).json(err);
-        })
+              return next();
+            } else {
+              throw new Error('user not found')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            res.status(500).json(err);
+          });
     }
 
     catch(error) {
