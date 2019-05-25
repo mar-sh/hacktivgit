@@ -11,7 +11,7 @@ const githubOauth = (req, res, next) => {
   })
     .then(({ data}) => {
       req.githubToken = data.split('=')[1].split('&')[0];
-      return next();
+      next();
     })
     .catch((err) => {
       console.log(err)
@@ -38,7 +38,7 @@ const githubUser = (req, res, next) => {
         avatar_url: data.avatar_url,
         token,
       };
-      return next();
+      next();
     })
     .catch((err) => {
       console.log(err)
