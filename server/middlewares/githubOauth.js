@@ -21,11 +21,11 @@ const githubOauth = (req, res, next) => {
 
 const githubUser = (req, res, next) => {
   const token = req.githubToken;
-  const url = `https://api.github.com`
+  const url = `https://api.github.com/user`
 
   axios({
     method: 'GET',
-    url: `${url}/user`,
+    url,
     headers: {
       Authorization: `token ${token}`,
       Accept: 'application/vnd.github.v3+json',
